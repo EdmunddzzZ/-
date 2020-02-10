@@ -8,7 +8,7 @@
 
 #import "ViewManager.h"
 #import "LoginViewController.h"
-
+#import "RegisterViewController.h"
 
 
 
@@ -37,7 +37,7 @@ static ViewManager *_myInstance;
     {
 //        DutyViewController *vc = [DutyViewController new];
         
-        LoginViewController *vc = [LoginViewController new];
+        LoginViewController*vc = [LoginViewController new];
         _navigationController = [[UINavigationController alloc]initWithRootViewController:vc];
         [[UINavigationBar appearance]setBarStyle:UIBarStyleBlack];//电池条，白色
     }

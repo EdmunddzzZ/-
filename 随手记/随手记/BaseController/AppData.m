@@ -29,7 +29,8 @@ static AppData* mInstance;
     self = [super init];
     if(self != nil)
     {
-            }
+        
+    }
     
     return self;
 }

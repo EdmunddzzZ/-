@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "CreateBase.h"
 #import "RegisterViewController.h"
+#import "MainViewController.h"
 @interface LoginViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong)UILabel *log;
 @property(nonatomic,strong)UIButton *reg;
@@ -16,12 +17,27 @@
 @property(nonatomic,strong)UITextField *password;
 @property(nonatomic,strong)UIButton *certain;
 @property(nonatomic,strong)UIButton *forget;
+@property(nonatomic,strong)UIButton *entrance;
 @end
 
 @implementation LoginViewController
-
+-(UIButton *)entrance
+{
+    if(!_entrance)
+    {
+        _entrance = [[UIButton alloc]initWithFrame:CGRectMake(sw/2-sw_(100), sh_(750), sw_(200), sh_(30))];
+        [_entrance setTitle:@"游客入口" forState:normal];
+        _entrance.titleLabel.font = [UIFont systemFontOfSize:15 weight:0.4];
+        [_entrance addTarget:self action:@selector(Entrance) forControlEvents:UIControlEventTouchUpInside];
+        [_entrance setTitleColor:[CreateBase createColor:0 blue:126 green:247] forState:normal];
+        
+        //[self.view addSubview:_entrance];
+    }
+    return _entrance;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view addSubview:self.entrance];
     self->topBar.hidden = YES;
     [self.view setBackgroundColor:[CreateBase createColor:237 blue:238 green:243]];
     [self.view addSubview:self.log];
@@ -127,6 +143,11 @@
         else
         input.text = @"";
     }
+}
+-(void)Entrance
+{
+    MainViewController *mvc = [MainViewController new];
+    [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
 }
 -(void)Register
 {

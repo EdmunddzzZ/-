@@ -14,12 +14,14 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - BMKLocationKit (1.8.5)
   - IQKeyboardManager (6.5.5)
   - JSONModel (1.8.0)
   - MJRefresh (3.3.1)
 
 DEPENDENCIES:
   - AFNetworking
+  - BMKLocationKit
   - IQKeyboardManager
   - JSONModel
   - MJRefresh
@@ -27,16 +29,18 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - BMKLocationKit
     - IQKeyboardManager
     - JSONModel
     - MJRefresh
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  BMKLocationKit: fd3d6b4a9a3a1a2763819f56b780bda5fc5b8726
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
 
-PODFILE CHECKSUM: e34adac392f9985c1c831edb5fe813aa52c2e394
+PODFILE CHECKSUM: 75dea6616cb3014c64d9ac0dcdcbbcb0c3d1f599
 
 COCOAPODS: 1.8.4

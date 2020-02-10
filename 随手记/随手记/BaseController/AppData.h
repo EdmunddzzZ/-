@@ -7,13 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
+static NSString *default_name = @"游客";
 
 @interface AppData : NSObject
+@property(nonatomic,strong)NSArray *User;
+@property(nonatomic,strong)NSString *CurrentUser;
+//@property(nonatomic,strong)NSArray *password;
+@property(nonatomic,strong)NSDictionary *data;
+
+
 
 /*
-    增添你放在全局的内容
- */
+    数据
+ @
+ {
+    @"User" : @[
+                @"ID" : @{
+                            @"date" : @""
+                            @"title" : @""
+                            .....
+ 
+ 
+ 
+                        }
+ 
+                ]
+ }
 
+ */
 
 + (AppData*)shareInstance;
 

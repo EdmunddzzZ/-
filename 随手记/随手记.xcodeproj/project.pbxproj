@@ -15,6 +15,8 @@
 		040AC84323E58397006BB274 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 040AC83923E58397006BB274 /* SVProgressHUD.bundle */; };
 		040AC84423E58397006BB274 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AC83B23E58397006BB274 /* SVProgressHUD.m */; };
 		040AC84523E58397006BB274 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AC83D23E58397006BB274 /* SVRadialGradientLayer.m */; };
+		040BBFF323F13B2D008FD840 /* RecycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040BBFF223F13B2D008FD840 /* RecycleViewController.m */; };
+		0447745223E92CFB00381CFA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0447745123E92CFB00381CFA /* MainViewController.m */; };
 		04D9A05523E549E0006CAEB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A05423E549E0006CAEB2 /* main.m */; };
 		04D9A05823E549E0006CAEB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A05723E549E0006CAEB2 /* AppDelegate.m */; };
 		04D9A05E23E549E0006CAEB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D9A05C23E549E0006CAEB2 /* Main.storyboard */; };
@@ -69,6 +71,10 @@
 		040AC83B23E58397006BB274 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		040AC83C23E58397006BB274 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		040AC83D23E58397006BB274 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		040BBFF123F13B2D008FD840 /* RecycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecycleViewController.h; sourceTree = "<group>"; };
+		040BBFF223F13B2D008FD840 /* RecycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecycleViewController.m; sourceTree = "<group>"; };
+		0447745023E92CFB00381CFA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		0447745123E92CFB00381CFA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		04D9A05023E549E0006CAEB2 /* 随手记.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "随手记.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D9A05423E549E0006CAEB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04D9A05623E549E0006CAEB2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -189,6 +195,72 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		040BBFED23F13AD2008FD840 /* Recycle */ = {
+			isa = PBXGroup;
+			children = (
+				040BBFEE23F13ADE008FD840 /* Model */,
+				040BBFF023F13B00008FD840 /* View */,
+				040BBFEF23F13AE8008FD840 /* ViewController */,
+			);
+			name = Recycle;
+			sourceTree = "<group>";
+		};
+		040BBFEE23F13ADE008FD840 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		040BBFEF23F13AE8008FD840 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				040BBFF123F13B2D008FD840 /* RecycleViewController.h */,
+				040BBFF223F13B2D008FD840 /* RecycleViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		040BBFF023F13B00008FD840 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0447744B23E92C7200381CFA /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				0447744C23E92CB300381CFA /* Model */,
+				0447744E23E92CC900381CFA /* View */,
+				0447744D23E92CB900381CFA /* ViewController */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		0447744C23E92CB300381CFA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0447744D23E92CB900381CFA /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0447745023E92CFB00381CFA /* MainViewController.h */,
+				0447745123E92CFB00381CFA /* MainViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0447744E23E92CC900381CFA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		04D9A04723E549E0006CAEB2 = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +287,8 @@
 				04D9A06B23E54A1C006CAEB2 /* Login */,
 				04D9A06A23E549F2006CAEB2 /* Register */,
 				04D9A0D723E54BF3006CAEB2 /* WSHNetwork */,
+				0447744B23E92C7200381CFA /* MainView */,
+				040BBFED23F13AD2008FD840 /* Recycle */,
 				04D9A05623E549E0006CAEB2 /* AppDelegate.h */,
 				04D9A05723E549E0006CAEB2 /* AppDelegate.m */,
 				04D9A11D23E54EF4006CAEB2 /* CreateBase.h */,
@@ -554,10 +628,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040BBFF323F13B2D008FD840 /* RecycleViewController.m in Sources */,
 				04D9A0C523E54BEB006CAEB2 /* UIColor+PYSearchExtension.m in Sources */,
 				04D9A05823E549E0006CAEB2 /* AppDelegate.m in Sources */,
 				04D9A0C023E54BEB006CAEB2 /* NSBundle+PYSearchExtension.m in Sources */,
 				04D9A0D523E54BEB006CAEB2 /* TZVideoPlayerController.m in Sources */,
+				0447745223E92CFB00381CFA /* MainViewController.m in Sources */,
 				04D9A0DD23E54C2D006CAEB2 /* ApiManager.m in Sources */,
 				040AC84123E58397006BB274 /* SVIndefiniteAnimatedView.m in Sources */,
 				04D9A0DE23E54C2D006CAEB2 /* UnitCell.m in Sources */,

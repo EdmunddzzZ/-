@@ -5,6 +5,6 @@ pod 'AFNetworking'
 pod 'MJRefresh'
 pod 'IQKeyboardManager'
 pod ‘JSONModel’
-
+pod ‘BMKLocationKit’
 end
 
