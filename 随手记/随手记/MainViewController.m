@@ -194,7 +194,10 @@
             break;
     }
 }
-
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[AppData shareInstance] saveDate];
+}
 /*
 #pragma mark - Navigation
 

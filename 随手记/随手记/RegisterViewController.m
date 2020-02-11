@@ -12,27 +12,14 @@
 #import "SVProgressHUD.h"
 #import "MainViewController.h"
 #import "JKCountDownButton.h"
+#import "MainViewController.h"
 @interface RegisterViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong)UIView *head;
-@property(nonatomic,strong)UIButton *entrance;
+//@property(nonatomic,strong)UIButton *entrance;
 @end
 
 @implementation RegisterViewController
--(UIButton *)entrance
-{
-    if(!_entrance)
-    {
-        UIButton *btn = [self.view viewWithTag:10003];
-       // _entrance = [CreateBase createButton:CGRectMake(sw/2-sw_(50), btn.frame.origin.y+sh_(70), sw_(30), sh_(20)) text:@"游客入口" textfont:13 target:@selector(Entrance)];
-        _entrance = [[UIButton alloc]initWithFrame:CGRectMake(sw/2-sw_(100), sh_(750)+sh_(150), sw_(200), sh_(30))];
-        [_entrance setTitle:@"游客入口" forState:normal];
-        _entrance.titleLabel.font = [UIFont systemFontOfSize:15 weight:0.4];
-        [_entrance addTarget:self action:@selector(Entrance) forControlEvents:UIControlEventTouchUpInside];
-        [_entrance setTitleColor:[CreateBase createColor:0 blue:126 green:247] forState:normal];
-        
-    }
-    return _entrance;
-}
+
 -(UIView *)head
 {
     if(!_head)
@@ -61,7 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%f-%f",sw,sh);
-    [self.view addSubview:self.entrance];
+    //[self.view addSubview:self.entrance];
     [self.view setBackgroundColor:[CreateBase createColor:237 blue:238 green:243]];
     [self.view addSubview:self.head];
     UIView *log = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head.frame)+100, sw, 200)];
@@ -80,25 +67,25 @@
     [btn setTitleColor:[UIColor grayColor] forState:normal];
     [btn setEnabled:NO];
     [btn addToucheHandler:^(JKCountDownButton *countDownButton, NSInteger tag)
-    {
-        [countDownButton setEnabled:NO];
-        [countDownButton startWithSecond:60];
-        [countDownButton didChange:^NSString *(JKCountDownButton *countDownButton, int second) {
-            [countDownButton setTitleColor:[UIColor grayColor] forState:normal];
-            [countDownButton.layer setBorderColor:[UIColor grayColor].CGColor];
-            [countDownButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
-            return [NSString stringWithFormat:@"剩余%d秒",second];
-        }];
-        [countDownButton didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
-            [countDownButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-            [countDownButton setTitleColor:[CreateBase createColor:0 blue:124 green:247] forState:normal];
-            [countDownButton.layer setBorderColor:[CreateBase createColor:0 blue:124 green:247].CGColor];
-            [countDownButton setEnabled:YES];
-            return @"验证码";
-        }];
-        
-    }];
-
+     {
+         [countDownButton setEnabled:NO];
+         [countDownButton startWithSecond:60];
+         [countDownButton didChange:^NSString *(JKCountDownButton *countDownButton, int second) {
+             [countDownButton setTitleColor:[UIColor grayColor] forState:normal];
+             [countDownButton.layer setBorderColor:[UIColor grayColor].CGColor];
+             [countDownButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
+             return [NSString stringWithFormat:@"剩余%d秒",second];
+         }];
+         [countDownButton didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
+             [countDownButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+             [countDownButton setTitleColor:[CreateBase createColor:0 blue:124 green:247] forState:normal];
+             [countDownButton.layer setBorderColor:[CreateBase createColor:0 blue:124 green:247].CGColor];
+             [countDownButton setEnabled:YES];
+             return @"验证码";
+         }];
+         
+     }];
+    
     
 
     //[btn setTitleColor:[CreateBase createColor:255 blue:44 green:0] forState:normal];
@@ -180,19 +167,28 @@
         return NO;
     }
 }
--(void)click:(UIButton *)sender
+-(void)click:(JKCountDownButton *)sender
 {
     // request
     UITextField *tf = [self.view viewWithTag:10000];
     NSString *str = tf.text;
     NSDictionary *dic = @{@"phone":str};
+    if([[AppData shareInstance].User containsObject:str])
+    {
+        [SVProgressHUD showErrorWithStatus:@"该用户已经注册！"];
+    }
+    else
+    {
     [[ApiManager shareInstance]POST:@"api/send/code/register" parameters:dic Success:^(id responseObject)
     {
         [SVProgressHUD showSuccessWithStatus:@"发送成功"];
+        
+
         NSLog(@"%@",responseObject);
     } Failure:^(id error) {
         
     }];
+    }
 }
 -(void)textfield:(UITextField *)sender
 {
@@ -263,6 +259,7 @@
     UITextField *tf2 = [self.view viewWithTag:10001];
     NSDictionary *dic = @{@"phone":tf.text,@"code":tf2.text};
     NSLog(@"%@----%@",tf.text,tf2.text);
+    
     [[ApiManager shareInstance]POST:@"api/verif/code" parameters:dic Success:^(id responseObject) {
 //        NSDictionary *res = responseObject;
         NSString *str = [responseObject objectForKey:@"code"];
@@ -272,34 +269,33 @@
         int number = [str intValue];
         if(number == 20000)
         {
-            NSLog(@"－－－－－－－－验证成功！");
-            [SVProgressHUD showInfoWithStatus:@"验证成功"];
-            [self Entrance];
+           // NSLog(@"－－－－－－－－验证成功！");
+            [[AppData shareInstance].User addObject:tf.text];
+            [AppData shareInstance].CurrentUser = tf.text;
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"通知" message:@"注册成功！默认密码为123456" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *acc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                tf.text = @"";
+                tf2.text = @"";
+                MainViewController *mvc = [MainViewController new];
+                [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
+            }];
+            [ac addAction:acc];
+            [self presentViewController:ac animated:YES completion:nil];
+            
+
+            
         }
         else
         {
-            NSLog(@"－－－验证失败");
-            [SVProgressHUD showInfoWithStatus:@"验证失败"];
+           // NSLog(@"－－－验证失败");
+            [SVProgressHUD showInfoWithStatus:@"验证码错误"];
         }
     } Failure:^(id error) {
         
     }];
 }
--(void)Entrance
-{
-    MainViewController *mvc = [MainViewController new];
-    [AppData shareInstance].CurrentUser = default_name; //
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"注意!"    message:@"游客的信息将不会被存储" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *acc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
-    }];
-    [ac addAction:acc];
-    //[[ViewManager shareInstance].NavigationController presentViewController:ac animated:YES completion:nil];
-    [self presentViewController:ac animated:YES completion:nil];
-    
-    
-    
-}
+
 -(void)Login_
 {
     [[ViewManager shareInstance].NavigationController popViewControllerAnimated:YES];

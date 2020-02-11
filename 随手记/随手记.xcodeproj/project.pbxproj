@@ -17,6 +17,7 @@
 		040AC84523E58397006BB274 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AC83D23E58397006BB274 /* SVRadialGradientLayer.m */; };
 		040BBFF323F13B2D008FD840 /* RecycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040BBFF223F13B2D008FD840 /* RecycleViewController.m */; };
 		0447745223E92CFB00381CFA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0447745123E92CFB00381CFA /* MainViewController.m */; };
+		04C3433023F278830012B76C /* NewTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C3432F23F278830012B76C /* NewTextViewController.m */; };
 		04D9A05523E549E0006CAEB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A05423E549E0006CAEB2 /* main.m */; };
 		04D9A05823E549E0006CAEB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A05723E549E0006CAEB2 /* AppDelegate.m */; };
 		04D9A05E23E549E0006CAEB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D9A05C23E549E0006CAEB2 /* Main.storyboard */; };
@@ -75,6 +76,8 @@
 		040BBFF223F13B2D008FD840 /* RecycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecycleViewController.m; sourceTree = "<group>"; };
 		0447745023E92CFB00381CFA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		0447745123E92CFB00381CFA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		04C3432E23F278830012B76C /* NewTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTextViewController.h; sourceTree = "<group>"; };
+		04C3432F23F278830012B76C /* NewTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTextViewController.m; sourceTree = "<group>"; };
 		04D9A05023E549E0006CAEB2 /* 随手记.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "随手记.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D9A05423E549E0006CAEB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04D9A05623E549E0006CAEB2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -261,6 +264,39 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		04C3432A23F278450012B76C /* NewText */ = {
+			isa = PBXGroup;
+			children = (
+				04C3432D23F278610012B76C /* Model */,
+				04C3432B23F278540012B76C /* View */,
+				04C3432C23F278590012B76C /* ViewController */,
+			);
+			name = NewText;
+			sourceTree = "<group>";
+		};
+		04C3432B23F278540012B76C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		04C3432C23F278590012B76C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				04C3432E23F278830012B76C /* NewTextViewController.h */,
+				04C3432F23F278830012B76C /* NewTextViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		04C3432D23F278610012B76C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		04D9A04723E549E0006CAEB2 = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +325,7 @@
 				04D9A0D723E54BF3006CAEB2 /* WSHNetwork */,
 				0447744B23E92C7200381CFA /* MainView */,
 				040BBFED23F13AD2008FD840 /* Recycle */,
+				04C3432A23F278450012B76C /* NewText */,
 				04D9A05623E549E0006CAEB2 /* AppDelegate.h */,
 				04D9A05723E549E0006CAEB2 /* AppDelegate.m */,
 				04D9A11D23E54EF4006CAEB2 /* CreateBase.h */,
@@ -661,6 +698,7 @@
 				04D9A07A23E54AAC006CAEB2 /* LoginViewController.m in Sources */,
 				04D9A0C223E54BEB006CAEB2 /* PYSearchConst.m in Sources */,
 				04D9A11F23E54EF4006CAEB2 /* CreateBase.m in Sources */,
+				04C3433023F278830012B76C /* NewTextViewController.m in Sources */,
 				04D9A0CD23E54BEB006CAEB2 /* TZImageManager.m in Sources */,
 				040AC83F23E58397006BB274 /* README.md in Sources */,
 				04D9A0C923E54BEB006CAEB2 /* TZAssetCell.m in Sources */,

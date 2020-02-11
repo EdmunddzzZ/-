@@ -10,11 +10,11 @@
 static NSString *default_name = @"游客";
 
 @interface AppData : NSObject
-@property(nonatomic,strong)NSArray *User;
+@property(nonatomic,strong)NSMutableArray *User;
 @property(nonatomic,strong)NSString *CurrentUser;
 //@property(nonatomic,strong)NSArray *password;
 @property(nonatomic,strong)NSDictionary *data;
-
+-(void)saveDate;
 
 
 /*

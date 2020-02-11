@@ -29,10 +29,30 @@ static AppData* mInstance;
     self = [super init];
     if(self != nil)
     {
-        
+        self.User = [NSMutableArray new];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *path = paths.firstObject;
+        NSString *filePath_User = [path stringByAppendingPathComponent:@"User"];
+        NSString *filePath_Data = [path stringByAppendingPathComponent:@"Data"];
+        NSString *filePath_CurrentUser = [path stringByAppendingPathComponent:@"Current_User"];
+        self.User = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_User];
+        self.data = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_Data];
+        self.CurrentUser = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_CurrentUser];
     }
     
     return self;
+}
+-(void)saveData
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = paths.firstObject;
+    NSString *filePath_User = [path stringByAppendingPathComponent:@"User"];
+    NSString *filePath_Data = [path stringByAppendingPathComponent:@"Data"];
+    NSString *filePath_CurrentUser = [path stringByAppendingPathComponent:@"Current_User"];
+    [NSKeyedArchiver archiveRootObject:[AppData shareInstance].User toFile:filePath_User];
+    [NSKeyedArchiver archiveRootObject:[AppData shareInstance].data toFile:filePath_Data];
+    [NSKeyedArchiver archiveRootObject:[AppData shareInstance].CurrentUser toFile:filePath_CurrentUser];
+    
 }
 
 

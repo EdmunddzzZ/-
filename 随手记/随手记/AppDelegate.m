@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewManager.h"
+#import "NewTextViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,7 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self.window setRootViewController:[ViewManager shareInstance].NavigationController];
+    NewTextViewController *nvc = [NewTextViewController new];
+    [self.window setRootViewController:nvc];
+    //[self.window setRootViewController:[ViewManager shareInstance].NavigationController];
     return YES;
 }
 

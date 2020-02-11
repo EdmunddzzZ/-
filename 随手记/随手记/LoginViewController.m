@@ -75,6 +75,7 @@
         _certain = [[UIButton alloc]initWithFrame:CGRectMake(sw_(42), sh_(629), sw_(666), sh_(88))];
         [_certain setBackgroundImage:[UIImage imageNamed:@"btn"] forState:normal];
         [_certain setTitle:@"登录" forState:normal];
+        [_certain addTarget:self action:@selector(certainClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _certain;
 }
@@ -147,12 +148,36 @@
 -(void)Entrance
 {
     MainViewController *mvc = [MainViewController new];
-    [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
+    [AppData shareInstance].CurrentUser = default_name; //
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"注意!"    message:@"游客的信息将不会被存储" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *acc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
+    }];
+    [ac addAction:acc];
+    //[[ViewManager shareInstance].NavigationController presentViewController:ac animated:YES completion:nil];
+    [self presentViewController:ac animated:YES completion:nil];
 }
 -(void)Register
 {
     RegisterViewController *rvc = [RegisterViewController new];
     [[ViewManager shareInstance].NavigationController pushViewController:rvc animated:YES];
+}
+-(void)certainClick
+{
+    if([[AppData shareInstance].User containsObject:self.account.text] && [self.password.text isEqualToString: @"123456"])
+    {
+        [AppData shareInstance].CurrentUser = self.account.text;
+        MainViewController *mvc = [MainViewController new];
+        [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
+    }
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    if(![[AppData shareInstance].CurrentUser isEqualToString:@""] &&![[AppData shareInstance].CurrentUser isEqualToString:default_name])
+    {
+        MainViewController *mvc = [MainViewController new];
+        [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
+    }
 }
 /*
 #pragma mark - Navigation
