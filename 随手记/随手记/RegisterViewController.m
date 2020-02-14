@@ -259,18 +259,18 @@
     UITextField *tf2 = [self.view viewWithTag:10001];
     NSDictionary *dic = @{@"phone":tf.text,@"code":tf2.text};
     NSLog(@"%@----%@",tf.text,tf2.text);
-    
-    [[ApiManager shareInstance]POST:@"api/verif/code" parameters:dic Success:^(id responseObject) {
-//        NSDictionary *res = responseObject;
-        NSString *str = [responseObject objectForKey:@"code"];
-        NSString *str2 = [responseObject objectForKey:@"msg"];
-        NSLog(@"%@",responseObject);
-        NSLog(@"%@-----%@",str,str2);
-        int number = [str intValue];
-        if(number == 20000)
-        {
+//    
+//    [[ApiManager shareInstance]POST:@"api/verif/code" parameters:dic Success:^(id responseObject) {
+////        NSDictionary *res = responseObject;
+//        NSString *str = [responseObject objectForKey:@"code"];
+//        NSString *str2 = [responseObject objectForKey:@"msg"];
+//        NSLog(@"%@",responseObject);
+//        NSLog(@"%@-----%@",str,str2);
+//        int number = [str intValue];
+//        if(number == 20000)
+//        {
            // NSLog(@"－－－－－－－－验证成功！");
-            [[AppData shareInstance].User addObject:tf.text];
+    [[[AppData shareInstance] User]addObject:tf.text];
             [AppData shareInstance].CurrentUser = tf.text;
             UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"通知" message:@"注册成功！默认密码为123456" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *acc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -285,15 +285,15 @@
             
 
             
-        }
-        else
-        {
-           // NSLog(@"－－－验证失败");
-            [SVProgressHUD showInfoWithStatus:@"验证码错误"];
-        }
-    } Failure:^(id error) {
-        
-    }];
+//        }
+//        else
+//        {
+//           // NSLog(@"－－－验证失败");
+//            [SVProgressHUD showInfoWithStatus:@"验证码错误"];
+//        }
+//    } Failure:^(id error) {
+//        
+//    }];
 }
 
 -(void)Login_

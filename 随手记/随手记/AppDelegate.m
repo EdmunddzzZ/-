@@ -18,9 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    NewTextViewController *nvc = [NewTextViewController new];
-    [self.window setRootViewController:nvc];
-    //[self.window setRootViewController:[ViewManager shareInstance].NavigationController];
+    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:@"Sp8CAte0UO2ZSZmhI2VUh8wIwhbT4Xw0" authDelegate:self];
+   // NewTextViewController *nvc = [NewTextViewController new];
+   // [self.window setRootViewController:nvc];
+    [self.window setRootViewController:[ViewManager shareInstance].NavigationController];
     return YES;
 }
 

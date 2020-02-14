@@ -201,6 +201,7 @@
 		040BBFED23F13AD2008FD840 /* Recycle */ = {
 			isa = PBXGroup;
 			children = (
+				04C3432C23F278590012B76C /* ViewController */,
 				040BBFEE23F13ADE008FD840 /* Model */,
 				040BBFF023F13B00008FD840 /* View */,
 				040BBFEF23F13AE8008FD840 /* ViewController */,
@@ -269,7 +270,6 @@
 			children = (
 				04C3432D23F278610012B76C /* Model */,
 				04C3432B23F278540012B76C /* View */,
-				04C3432C23F278590012B76C /* ViewController */,
 			);
 			name = NewText;
 			sourceTree = "<group>";

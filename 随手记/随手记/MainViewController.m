@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "CreateBase.h"
 #import "BMKLocationkit/BMKLocationComponent.h"
+#import "NewTextViewController.h"
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UITableView *File;
 @property(nonatomic,strong)UIButton *Optionbtn;
@@ -75,6 +76,11 @@
         
     }
     return _Optionbtn;
+}
+-(void)RightbtnClick
+{
+    NewTextViewController *nvc = [NewTextViewController new];
+    [[ViewManager shareInstance].NavigationController presentViewController:nvc animated:YES completion:nil];
 }
 -(void)OptionClick
 {
@@ -196,7 +202,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[AppData shareInstance] saveDate];
+    [[AppData shareInstance] saveData];
 }
 /*
 #pragma mark - Navigation

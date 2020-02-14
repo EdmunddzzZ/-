@@ -8,7 +8,7 @@
 
 #import "NewTextViewController.h"
 
-@interface NewTextViewController ()<UITextViewDelegate>
+@interface NewTextViewController ()<UITextViewDelegate,BMKLocationAuthDelegate,BMKLocationManagerDelegate>
 @property(nonatomic,strong)UITextField *Title;
 @property(nonatomic,strong)UITextView *mainText;
 @property(nonatomic,strong)UILabel *currentDate;
@@ -16,12 +16,22 @@
 @property(nonatomic,strong)NSString *Location;
 @property(nonatomic,strong)UILabel *line;
 @property(nonatomic,strong)UIButton *Rightbtn;
-@end
+@property(nonatomic,strong)UIButton *locationbtn;
+@property(nonatomic,strong)BMKLocationManager  *locationManager;
+@property(nonatomic,strong)UILabel *Locationlab;
+@property(nonatomic,strong)NSString *ID;
 
+@end
 @implementation NewTextViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    {
+        NSMutableArray *current_data = [[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser];
+        self.ID =[NSString stringWithFormat:@"%lu",current_data.count+1];
+        
+    }
+    
     [self.view setBackgroundColor:[CreateBase createColor:245]];
     [self->topBar setBackgroundColor:[CreateBase createColor:245]];
     [self.view addSubview:self.line];
@@ -31,6 +41,8 @@
     [self.view addSubview:self.Title];
     [self.view addSubview:self.currentDate];
     [self.view addSubview:self.mainText];
+    [self.view addSubview:self.locationbtn];
+    [self.view addSubview:self.Locationlab];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +58,60 @@
     }
     return _line;
 }
+-(UIButton *)locationbtn
+{
+    if(!_locationbtn)
+    {
+        _locationbtn = [[UIButton alloc]initWithFrame:CGRectMake(sw_(30), CGRectGetMaxY(self.mainText.frame)+sh_(20),sw_(200),sh_(30))];
+        [_locationbtn setTitle:@"获取地址" forState:normal];
+        [_locationbtn addTarget:self action:@selector(locationClick) forControlEvents:UIControlEventTouchUpInside];
+        [_locationbtn setTitleColor:[CreateBase createColor:0 blue:147 green:249]  forState:normal];
+         
+        
+    }
+    return _locationbtn;
+}
+-(void)locationClick
+{
+    self.locationManager = [[BMKLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.coordinateType = BMKLocationCoordinateTypeBMK09LL;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.activityType = CLActivityTypeAutomotiveNavigation;
+    self.locationManager.pausesLocationUpdatesAutomatically = NO;
+    //locationManager.allowsBackgroundLocationUpdates = YES;
+    self.locationManager.locationTimeout = 10;
+    self.locationManager.reGeocodeTimeout = 10;
+    
+    [self.locationManager requestLocationWithReGeocode:YES withNetworkState:YES completionBlock:^(BMKLocation * _Nullable location, BMKLocationNetworkState state, NSError * _Nullable error) {
+        if (error)
+        {
+            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+        }
+        if (location) {//得到定位信息，添加annotation
+            
+//            if (location.location) {
+//                NSLog(@"LOC = %@",location.location);
+//            }
+            if (location.rgcData) {
+                UILabel *lab = [self.view viewWithTag:30003];
+                lab.text = [NSString stringWithFormat:@"当前位置:%@ %@ %@ %@",location.rgcData.country,location.rgcData.province,location.rgcData.city,location.rgcData.district];
+                NSLog(@"%@ %@ %@ %@",location.rgcData.country,location.rgcData.province,location.rgcData.city,location.rgcData.district);
+            }
+            
+//            if (location.rgcData.poiList) {
+//                for (BMKLocationPoi * poi in location.rgcData.poiList) {
+//                    NSLog(@"poi = %@, %@, %f, %@, %@", poi.name, poi.addr, poi.relaiability, poi.tags, poi.uid);
+//                }
+//            }
+            
+            if (location.rgcData.poiRegion) {
+                NSLog(@"poiregion = %@, %@, %@", location.rgcData.poiRegion.name, location.rgcData.poiRegion.tags, location.rgcData.poiRegion.directionDesc);
+            }
+            
+        }
+    }];}
 -(UIButton *)Rightbtn // 完成按钮
 {
     if(!_Rightbtn)
@@ -56,6 +122,18 @@
         [_Rightbtn addTarget:self action:@selector(RightbtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _Rightbtn;
+}
+-(UILabel *)Locationlab
+{
+    if(!_Locationlab)
+    {
+        _Locationlab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.locationbtn.frame),self.locationbtn.frame.origin.y, sw-CGRectGetMaxX(self.locationbtn.frame)+sw_(20), sh_(100))];
+        _Locationlab.textColor = [UIColor blackColor];
+        _Locationlab.tag = 30003;
+        _Locationlab.font = self.currentDate.font;
+        _Locationlab.numberOfLines = 0;
+    }
+    return  _Locationlab;
 }
 -(UIButton *)cancelbtn
 {
@@ -68,6 +146,7 @@
     }
     return _cancelbtn;
 }
+
 -(UITextField *)Title
 {
     if(!_Title)
@@ -137,9 +216,18 @@
     }
     return _currentDate;
 }
+-(void)cancelClick
+{
+    [[ViewManager shareInstance].NavigationController dismissViewControllerAnimated:YES completion:nil];
+}
 -(void)RightbtnClick //完成按钮
 {
+    NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithDictionary:@{@"title":self.Title.text,@"date":self.currentDate.text,@"text":self.mainText.text,@"location":self.Locationlab.text}];
+    NSMutableDictionary *dic2 =[NSMutableDictionary dictionaryWithDictionary:@{self.ID:dic}];
     
+    [[[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser] addObject:dic2];
+    [[ViewManager shareInstance].NavigationController dismissViewControllerAnimated:YES completion:nil];
+    //[AppData shareInstance].data
 }
 
 /*

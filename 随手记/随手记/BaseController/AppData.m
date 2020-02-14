@@ -29,21 +29,29 @@ static AppData* mInstance;
     self = [super init];
     if(self != nil)
     {
-        self.User = [NSMutableArray new];
+        self.User = [[NSMutableArray alloc]init];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        if(paths)
+        {
         NSString *path = paths.firstObject;
         NSString *filePath_User = [path stringByAppendingPathComponent:@"User"];
         NSString *filePath_Data = [path stringByAppendingPathComponent:@"Data"];
         NSString *filePath_CurrentUser = [path stringByAppendingPathComponent:@"Current_User"];
+            if([NSKeyedUnarchiver unarchiveObjectWithFile:filePath_User])
         self.User = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_User];
+            if([NSKeyedUnarchiver unarchiveObjectWithFile:filePath_Data])
         self.data = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_Data];
+            if([NSKeyedUnarchiver unarchiveObjectWithFile:filePath_CurrentUser])
         self.CurrentUser = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_CurrentUser];
+        }
     }
     
     return self;
 }
+
 -(void)saveData
 {
+    NSLog(@"－－－－－－－－－－－－－－savedata－－－－－－－－－－－－－－－");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = paths.firstObject;
     NSString *filePath_User = [path stringByAppendingPathComponent:@"User"];

@@ -55,6 +55,8 @@
     line2.backgroundColor = [CreateBase createColor:198 blue:195 green:193];
     [self.view addSubview:line2];
     [self.view addSubview:self.forget];
+    
+    
     // Do any additional setup after loading the view.
 }
 -(UIButton *)forget
@@ -95,6 +97,7 @@
     if(!_account)
     {
         _account = [[UITextField alloc]initWithFrame:CGRectMake(sw_(42), sh_(366), sw-sw_(42), sh_(32))];
+        
         _account.placeholder = @"请输入您的手机号";
         _account.font = [UIFont systemFontOfSize:18 weight:0.3];
         _account.textColor = [UIColor blackColor];
@@ -166,18 +169,22 @@
 {
     if([[AppData shareInstance].User containsObject:self.account.text] && [self.password.text isEqualToString: @"123456"])
     {
+        
         [AppData shareInstance].CurrentUser = self.account.text;
         MainViewController *mvc = [MainViewController new];
+        self.account.text = @"";
+        self.password.text = @"";
+        self.editing = NO;
         [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
     }
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if(![[AppData shareInstance].CurrentUser isEqualToString:@""] &&![[AppData shareInstance].CurrentUser isEqualToString:default_name])
-    {
-        MainViewController *mvc = [MainViewController new];
-        [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
-    }
+//    if(![[AppData shareInstance].CurrentUser isEqualToString:@""] &&![[AppData shareInstance].CurrentUser isEqualToString:default_name])
+//    {
+//        MainViewController *mvc = [MainViewController new];
+//        [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
+//    }
 }
 /*
 #pragma mark - Navigation

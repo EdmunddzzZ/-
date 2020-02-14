@@ -13,8 +13,8 @@ static NSString *default_name = @"游客";
 @property(nonatomic,strong)NSMutableArray *User;
 @property(nonatomic,strong)NSString *CurrentUser;
 //@property(nonatomic,strong)NSArray *password;
-@property(nonatomic,strong)NSDictionary *data;
--(void)saveDate;
+@property(nonatomic,strong)NSMutableDictionary *data;
+-(void)saveData;
 
 
 /*
@@ -22,7 +22,8 @@ static NSString *default_name = @"游客";
  @
  {
     @"User" : @[
-                @"ID" : @{
+                @{
+                    @"ID" : @{
                             @"date" : @""
                             @"title" : @""
                             .....
@@ -30,6 +31,7 @@ static NSString *default_name = @"游客";
  
  
                         }
+ 
  
                 ]
  }
