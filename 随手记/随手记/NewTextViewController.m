@@ -26,12 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    {
-        NSMutableArray *current_data = [[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser];
-        self.ID =[NSString stringWithFormat:@"%lu",current_data.count+1];
-        
-    }
-    
     [self.view setBackgroundColor:[CreateBase createColor:245]];
     [self->topBar setBackgroundColor:[CreateBase createColor:245]];
     [self.view addSubview:self.line];
@@ -132,6 +126,7 @@
         _Locationlab.tag = 30003;
         _Locationlab.font = self.currentDate.font;
         _Locationlab.numberOfLines = 0;
+        _Locationlab.text = @"";
     }
     return  _Locationlab;
 }
@@ -201,12 +196,15 @@
     {
         _currentDate = [[UILabel alloc]initWithFrame: CGRectMake(sw_(20), CGRectGetMaxY(self.Title.frame)+sh_(10), sw, sh_(30))];
         NSDateFormatter *format = [[NSDateFormatter alloc]init];
+        NSDateFormatter *format2 = [[NSDateFormatter alloc]init];
         [format setDateFormat:@"yyyy年 MM月 dd日 HH:mm"];
+        [format2 setDateFormat:@"yyyyMMddHHmm"];
         NSDate *nowdate = [NSDate date];
         NSTimeZone *zone = [NSTimeZone systemTimeZone];
        // NSInteger interval = [zone secondsFromGMT];
        // nowdate = [nowdate dateByAddingTimeInterval:interval];
         _currentDate.text = [format stringFromDate:nowdate];
+        self.ID = [format2 stringFromDate:nowdate];
         [_currentDate setTextColor:[UIColor blackColor]];
         [_currentDate setFont:[UIFont systemFontOfSize:15 weight:0.2]];
         [_currentDate setTextAlignment:NSTextAlignmentLeft];
@@ -227,6 +225,7 @@
     
     [[[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser] addObject:dic2];
     [[ViewManager shareInstance].NavigationController dismissViewControllerAnimated:YES completion:nil];
+    //NSLog(@"----------完成按钮执行完毕－－－－－－");
     //[AppData shareInstance].data
 }
 

@@ -30,10 +30,13 @@ static AppData* mInstance;
     if(self != nil)
     {
         self.User = [[NSMutableArray alloc]init];
+        self.Recycle = [[NSMutableArray alloc]init];
+        self.data = [NSMutableDictionary new];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         if(paths)
         {
         NSString *path = paths.firstObject;
+            NSString *filepath_Recycle = [path stringByAppendingPathComponent:@"Recycle"];
         NSString *filePath_User = [path stringByAppendingPathComponent:@"User"];
         NSString *filePath_Data = [path stringByAppendingPathComponent:@"Data"];
         NSString *filePath_CurrentUser = [path stringByAppendingPathComponent:@"Current_User"];
@@ -43,6 +46,8 @@ static AppData* mInstance;
         self.data = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_Data];
             if([NSKeyedUnarchiver unarchiveObjectWithFile:filePath_CurrentUser])
         self.CurrentUser = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath_CurrentUser];
+            if([NSKeyedUnarchiver unarchiveObjectWithFile:filepath_Recycle])
+                self.Recycle = [NSKeyedUnarchiver unarchiveObjectWithFile:filepath_Recycle];
         }
     }
     
@@ -57,9 +62,11 @@ static AppData* mInstance;
     NSString *filePath_User = [path stringByAppendingPathComponent:@"User"];
     NSString *filePath_Data = [path stringByAppendingPathComponent:@"Data"];
     NSString *filePath_CurrentUser = [path stringByAppendingPathComponent:@"Current_User"];
+    NSString *filepath_Recycle = [path stringByAppendingPathComponent:@"Recycle"];
     [NSKeyedArchiver archiveRootObject:[AppData shareInstance].User toFile:filePath_User];
     [NSKeyedArchiver archiveRootObject:[AppData shareInstance].data toFile:filePath_Data];
     [NSKeyedArchiver archiveRootObject:[AppData shareInstance].CurrentUser toFile:filePath_CurrentUser];
+    [NSKeyedArchiver archiveRootObject:[AppData shareInstance].Recycle toFile:filepath_Recycle];
     
 }
 

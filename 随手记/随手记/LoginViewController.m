@@ -163,14 +163,14 @@
 -(void)Register
 {
     RegisterViewController *rvc = [RegisterViewController new];
-    [[ViewManager shareInstance].NavigationController pushViewController:rvc animated:YES];
+    [[ViewManager shareInstance].NavigationController pushViewController:rvc animated:NO];
 }
 -(void)certainClick
 {
     if([[AppData shareInstance].User containsObject:self.account.text] && [self.password.text isEqualToString: @"123456"])
     {
-        
         [AppData shareInstance].CurrentUser = self.account.text;
+        
         MainViewController *mvc = [MainViewController new];
         self.account.text = @"";
         self.password.text = @"";

@@ -14,6 +14,7 @@ static NSString *default_name = @"游客";
 @property(nonatomic,strong)NSString *CurrentUser;
 //@property(nonatomic,strong)NSArray *password;
 @property(nonatomic,strong)NSMutableDictionary *data;
+@property(nonatomic,strong)NSMutableArray *Recycle;
 -(void)saveData;
 
 

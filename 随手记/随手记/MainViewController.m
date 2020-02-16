@@ -204,6 +204,33 @@
 {
     [[AppData shareInstance] saveData];
 }
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSMutableArray * array = [[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser];
+    return array.count;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return sh_(100);
+}
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSMutableArray * array = [[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser];
+        [[AppData shareInstance].Recycle addObject:array[indexPath.row]];
+        [[[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser] removeObjectAtIndex:indexPath.row];
+        [self.File reloadData];
+    }
+}
 /*
 #pragma mark - Navigation
 
