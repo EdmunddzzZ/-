@@ -28,10 +28,11 @@ static NSString *default_name = @"游客";
                             @"date" : @""
                             @"title" : @""
                             .....
+                            }
  
  
  
-                        }
+                }
  
  
                 ]
@@ -39,8 +40,8 @@ static NSString *default_name = @"游客";
 
  */
 
-+ (AppData*)shareInstance;
-
++(AppData*)shareInstance;
+-(void)deleteData:(NSIndexPath*)indexpath;
 
 @end
 

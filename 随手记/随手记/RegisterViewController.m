@@ -241,12 +241,12 @@
     UIButton *btn = [self.view viewWithTag:10003];
     if(sender.text.length == 6)
     {
-        btn.backgroundColor = [CreateBase createColor:0 blue:149 green:245];
+       // btn.backgroundColor = [CreateBase createColor:0 blue:149 green:245];
         [btn setEnabled:YES];
     }
     else
     {
-        btn.backgroundColor = [UIColor grayColor];
+       //btn.backgroundColor = [UIColor grayColor];
         [btn setEnabled:NO];
     }
 
@@ -259,7 +259,7 @@
     UITextField *tf2 = [self.view viewWithTag:10001];
     NSDictionary *dic = @{@"phone":tf.text,@"code":tf2.text};
     NSLog(@"%@----%@",tf.text,tf2.text);
-//    
+//
 //    [[ApiManager shareInstance]POST:@"api/verif/code" parameters:dic Success:^(id responseObject) {
 ////        NSDictionary *res = responseObject;
 //        NSString *str = [responseObject objectForKey:@"code"];
@@ -276,7 +276,8 @@
     if(![[AppData shareInstance].User containsObject:[AppData shareInstance].CurrentUser])
     {
         NSMutableArray *array = [NSMutableArray new];
-        [[[AppData shareInstance] User]addObject:tf.text];
+        NSMutableArray *array2 = [NSMutableArray new];
+    [[[AppData shareInstance] User]addObject:tf.text];
         [[AppData shareInstance].data setObject:array forKey:[AppData shareInstance].CurrentUser];
     }
             UIAlertAction *acc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

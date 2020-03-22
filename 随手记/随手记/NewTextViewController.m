@@ -9,17 +9,7 @@
 #import "NewTextViewController.h"
 
 @interface NewTextViewController ()<UITextViewDelegate,BMKLocationAuthDelegate,BMKLocationManagerDelegate>
-@property(nonatomic,strong)UITextField *Title;
-@property(nonatomic,strong)UITextView *mainText;
-@property(nonatomic,strong)UILabel *currentDate;
-@property(nonatomic,strong)UIButton *cancelbtn;
-@property(nonatomic,strong)NSString *Location;
-@property(nonatomic,strong)UILabel *line;
-@property(nonatomic,strong)UIButton *Rightbtn;
-@property(nonatomic,strong)UIButton *locationbtn;
-@property(nonatomic,strong)BMKLocationManager  *locationManager;
-@property(nonatomic,strong)UILabel *Locationlab;
-@property(nonatomic,strong)NSString *ID;
+
 
 @end
 @implementation NewTextViewController
@@ -37,6 +27,12 @@
     [self.view addSubview:self.mainText];
     [self.view addSubview:self.locationbtn];
     [self.view addSubview:self.Locationlab];
+    
+    UILabel *placeholder = [self.view viewWithTag:30001];
+    if(self.flag == 0)
+        placeholder.hidden = NO;
+    else
+        placeholder.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,9 +140,9 @@
 
 -(UITextField *)Title
 {
-    if(!_Title)
+    if(!_Title )
     {
-        _Title = [[UITextField alloc]initWithFrame:CGRectMake(sw_(20), CGRectGetMaxY(self->topBar.frame)+sh_(10), sw-sw_(20), sh_(100))];
+        _Title = [[UITextField alloc]initWithFrame:CGRectMake(sw_(20), sh_(98)+sh_(10), sw-sw_(20), sh_(100))];
         [_Title setTextAlignment:NSTextAlignmentLeft];
         [_Title setPlaceholder:@"标题"];
         [_Title setTextColor:[UIColor blackColor]];
@@ -170,6 +166,7 @@
         [_mainText setFont:[UIFont systemFontOfSize:15 weight:0.3]];
         UILabel *placeholder = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, sw, 20)];
         [placeholder setFont:[UIFont systemFontOfSize:15 weight:0.3]];
+        
         placeholder.text = @"请输入您的内容";
         [placeholder setTextColor:[UIColor grayColor]];
         placeholder.tag = 30001;
@@ -220,14 +217,21 @@
 }
 -(void)RightbtnClick //完成按钮
 {
+    if(self.flag == 1)
+    {
+        [[AppData shareInstance] deleteData:self.indexpath];
+    }
     NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithDictionary:@{@"title":self.Title.text,@"date":self.currentDate.text,@"text":self.mainText.text,@"location":self.Locationlab.text}];
     NSMutableDictionary *dic2 =[NSMutableDictionary dictionaryWithDictionary:@{self.ID:dic}];
     
     [[[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser] addObject:dic2];
+    [[AppData shareInstance] saveData];
     [[ViewManager shareInstance].NavigationController dismissViewControllerAnimated:YES completion:nil];
     //NSLog(@"----------完成按钮执行完毕－－－－－－");
     //[AppData shareInstance].data
-}
+    
+    
+    }
 
 /*
 #pragma mark - Navigation

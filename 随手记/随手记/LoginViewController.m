@@ -10,6 +10,7 @@
 #import "CreateBase.h"
 #import "RegisterViewController.h"
 #import "MainViewController.h"
+#import "SVProgressHUD.h"
 @interface LoginViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong)UILabel *log;
 @property(nonatomic,strong)UIButton *reg;
@@ -176,6 +177,10 @@
         self.password.text = @"";
         self.editing = NO;
         [[ViewManager shareInstance].NavigationController pushViewController:mvc animated:YES];
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"用户不存在或密码错误!"];
     }
 }
 -(void)viewWillAppear:(BOOL)animated

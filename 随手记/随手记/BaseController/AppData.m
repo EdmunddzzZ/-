@@ -56,7 +56,7 @@ static AppData* mInstance;
 
 -(void)saveData
 {
-    NSLog(@"－－－－－－－－－－－－－－savedata－－－－－－－－－－－－－－－");
+    //NSLog(@"－－－－－－－－－－－－－－savedata－－－－－－－－－－－－－－－");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = paths.firstObject;
     NSString *filePath_User = [path stringByAppendingPathComponent:@"User"];
@@ -68,6 +68,10 @@ static AppData* mInstance;
     [NSKeyedArchiver archiveRootObject:[AppData shareInstance].CurrentUser toFile:filePath_CurrentUser];
     [NSKeyedArchiver archiveRootObject:[AppData shareInstance].Recycle toFile:filepath_Recycle];
     
+}
+-(void)deleteData:(NSIndexPath *)indexpath
+{
+      [[[AppData shareInstance].data objectForKey:[AppData shareInstance].CurrentUser] removeObjectAtIndex:indexpath.row];
 }
 
 

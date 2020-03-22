@@ -2,8 +2,8 @@
 //  SizeHeader.h
 //  projectBase
 //
-//  Created by chenjianying on 15-9-11.
-//  Copyright (c) 2015年 chenjianying. All rights reserved.
+//  Created by shanghui wu on 19-5-11.
+//  Copyright (c) 2019年 shanghuiwu. All rights reserved.
 //
 
 #ifndef projectBase_SizeHeader_h
